@@ -174,7 +174,7 @@ ActionReference.prototype.toUXP = function () {
       return "{ \"_ref\": \"" + typeIDToStringID(this.getDesiredClass()) + "\", \"_enum\": \"" + typeIDToStringID(this.getEnumeratedType()) + "\", \"_value\": \"" + typeIDToStringID(this.getEnumeratedValue()) + "\" }";
       break;
     case ReferenceFormType.IDENTIFIER:
-      return "{ \"_ref\": \"" + typeIDToStringID(this.getDesiredClass()) + "\", \"_id\": " + this.getIdentifier().toString() + "\" }";
+      return "{ \"_ref\": \"" + typeIDToStringID(this.getDesiredClass()) + "\", \"_id\": " + this.getIdentifier().toString() + " }";
       break;
     case ReferenceFormType.INDEX:
       return "{ \"_ref\": \"" + typeIDToStringID(this.getDesiredClass()) + "\", \"_index\": " + this.getIndex().toString() + " }";
@@ -183,7 +183,7 @@ ActionReference.prototype.toUXP = function () {
       return "{ \"_ref\": \"" + typeIDToStringID(this.getDesiredClass()) + "\", \"_name\": \"" + this.getName() + "\" }";
       break;
     case ReferenceFormType.OFFSET:
-      return "{ \"_ref\": \"" + typeIDToStringID(this.getDesiredClass()) + "\", \"_offset\": " + this.getOffset().toString() + "\" }";
+      return "{ \"_ref\": \"" + typeIDToStringID(this.getDesiredClass()) + "\", \"_offset\": " + this.getOffset().toString() + " }";
       break;
     case ReferenceFormType.PROPERTY:
       var container = this.getContainer();
