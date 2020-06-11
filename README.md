@@ -25,5 +25,5 @@ executeActionGetForUXP(ref);
 You will get a print out like this, and your script will continue to function.
 
 ```
-require('photoshop').action.batchPlay([{ "_obj": "get", "_target":{ "_ref": [{ "_property": "name" }, { "_ref": "layer", "_index": 1" }]} }], {})
+require('photoshop').action.batchPlay([{ "_obj": "get", "_target":{ "_ref": [{ "_property": "name" }, { "_ref": "layer", "_index": 1 }]} }], {})
 ```

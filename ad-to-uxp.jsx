@@ -177,7 +177,7 @@ ActionReference.prototype.toUXP = function () {
       return "{ \"_ref\": \"" + typeIDToStringID(this.getDesiredClass()) + "\", \"_id\": " + this.getIdentifier().toString() + "\" }";
       break;
     case ReferenceFormType.INDEX:
-      return "{ \"_ref\": \"" + typeIDToStringID(this.getDesiredClass()) + "\", \"_index\": " + this.getIndex().toString() + "\" }";
+      return "{ \"_ref\": \"" + typeIDToStringID(this.getDesiredClass()) + "\", \"_index\": " + this.getIndex().toString() + " }";
       break;
     case ReferenceFormType.NAME:
       return "{ \"_ref\": \"" + typeIDToStringID(this.getDesiredClass()) + "\", \"_name\": \"" + this.getName() + "\" }";
