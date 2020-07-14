@@ -215,9 +215,15 @@ executeActionForUXP = function (eventID, descriptor, displayDialogs) {
     finalForm += " }";
   }
   finalForm += " }], { \"synchronousExecution\": true })";
-  $.writeln("-----------");
+
+  var logFile = new File(Folder.desktop.absoluteURI + "/batchplay.log");
+  logFile.open("a")
+  logFile.writeln(finalForm);
+  logFile.writeln("-----------");
+  logFile.close();
+
   $.writeln(finalForm);
-  $.writeln("-----------");
+  
   return app.executeAction(eventID, descriptor, displayDialogs);
 };
 
@@ -226,8 +232,13 @@ executeActionGetForUXP = function (reference) {
   finalForm += reference.toUXP();
   finalForm += " }], {})";
 
-  $.writeln("-----------");
+  var logFile = new File(Folder.desktop.absoluteURI + "/batchplay.log");
+  var x = logFile.open("a");
+  logFile.writeln(finalForm);
+  logFile.writeln("-----------");
+  logFile.close();
+
   $.writeln(finalForm);
-  $.writeln("-----------");
+  
   return app.executeActionGet(reference);
 }
