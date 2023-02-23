@@ -10,7 +10,7 @@ ActionDescriptor.prototype.toUXPSerialized = function () {
   for (var i = 0; i < count; i++) {
     var key = this.getKey(i);
     var type = this.getType(key);
-    var keyStr = typeIDToStringID(key);
+    var keyStr = typeIDToStringIDForUXP(key);
 
     if (keyStr === "null") {
       keyStr = "_target";
@@ -31,7 +31,7 @@ ActionDescriptor.prototype.toUXPSerialized = function () {
         break;
       case DescValueType.CLASSTYPE:
         var c = this.getClass(key);
-        form += "{ \"_class\": \"" + typeIDToStringID(c) + "\" }";
+        form += "{ \"_class\": \"" + typeIDToStringIDForUXP(c) + "\" }";
         break;
       case DescValueType.DOUBLETYPE:
         var f = this.getDouble(key);
@@ -40,7 +40,7 @@ ActionDescriptor.prototype.toUXPSerialized = function () {
       case DescValueType.ENUMERATEDTYPE:
         var t = this.getEnumerationType(key);
         var v = this.getEnumerationValue(key);
-        form += "{ \"_enum\": \"" + typeIDToStringID(t) + "\", \"_value\": \"" + typeIDToStringID(v) + "\" }";
+        form += "{ \"_enum\": \"" + typeIDToStringIDForUXP(t) + "\", \"_value\": \"" + typeIDToStringIDForUXP(v) + "\" }";
         break;
       case DescValueType.INTEGERTYPE:
         var intv = this.getInteger(key);
@@ -57,7 +57,7 @@ ActionDescriptor.prototype.toUXPSerialized = function () {
       case DescValueType.OBJECTTYPE:
         var objt = this.getObjectType(key);
         var objv = this.getObjectValue(key);
-        form += "{ \"_obj\": \"" + typeIDToStringID(objt) + "\" ";
+        form += "{ \"_obj\": \"" + typeIDToStringIDForUXP(objt) + "\" ";
         if (objv !== undefined && objv.count > 0) {
           form += "," + objv.toUXPSerialized();
         }
@@ -73,7 +73,7 @@ ActionDescriptor.prototype.toUXPSerialized = function () {
         form += "\"" + this.getString(key) + "\"";
         break;
       case DescValueType.UNITDOUBLE:
-        form += "{ \"_unit\": \"" + typeIDToStringID(this.getUnitDoubleType(key)) + "\",\n\"_value\": " + this.getUnitDoubleValue(key).toString() + " }";
+        form += "{ \"_unit\": \"" + typeIDToStringIDForUXP(this.getUnitDoubleType(key)) + "\",\n\"_value\": " + this.getUnitDoubleValue(key).toString() + " }";
         break;
     }
     if (i < count - 1) {
@@ -105,7 +105,7 @@ ActionList.prototype.toUXP = function () {
         break;
       case DescValueType.CLASSTYPE:
         var c = this.getClass(i);
-        form += "{ \"_class\": \"" + typeIDToStringID(c) + "\" }";
+        form += "{ \"_class\": \"" + typeIDToStringIDForUXP(c) + "\" }";
         break;
       case DescValueType.DOUBLETYPE:
         var f = this.getDouble(i);
@@ -114,7 +114,7 @@ ActionList.prototype.toUXP = function () {
       case DescValueType.ENUMERATEDTYPE:
         var t = this.getEnumerationType(i);
         var v = this.getEnumerationValue(i);
-        form += "{ \"_enum\": \"" + typeIDToStringID(t) + "\", \"_value\": \"" + typeIDToStringID(v) + "\" }";
+        form += "{ \"_enum\": \"" + typeIDToStringIDForUXP(t) + "\", \"_value\": \"" + typeIDToStringIDForUXP(v) + "\" }";
         break;
       case DescValueType.INTEGERTYPE:
         var intv = this.getInteger(i);
@@ -131,7 +131,7 @@ ActionList.prototype.toUXP = function () {
       case DescValueType.OBJECTTYPE:
         var objt = this.getObjectType(i);
         var objv = this.getObjectValue(i);
-        form += "{ \"_obj\": \"" + typeIDToStringID(objt) + "\" ";
+        form += "{ \"_obj\": \"" + typeIDToStringIDForUXP(objt) + "\" ";
         if (objv !== undefined && objv.count > 0) {
           form += "," + objv.toUXPSerialized();
         }
@@ -147,7 +147,7 @@ ActionList.prototype.toUXP = function () {
         form += "\"" + this.getString(i) + "\"";
         break;
       case DescValueType.UNITDOUBLE:
-        form += "{ \"_unit\": \"" + typeIDToStringID(this.getUnitDoubleType(i)) + "\", \"_value\": " + this.getUnitDoubleValue(i).toString() + " }";
+        form += "{ \"_unit\": \"" + typeIDToStringIDForUXP(this.getUnitDoubleType(i)) + "\", \"_value\": " + this.getUnitDoubleValue(i).toString() + " }";
         break;
     }
     if (i < count - 1) {
@@ -168,26 +168,26 @@ ActionList.prototype.toUXP = function () {
 ActionReference.prototype.toUXP = function () {
   switch (this.getForm()) {
     case ReferenceFormType.CLASSTYPE:
-      return "{ \"_ref\": \"" + typeIDToStringID(this.getDesiredClass()) + "\" }";
+      return "{ \"_ref\": \"" + typeIDToStringIDForUXP(this.getDesiredClass()) + "\" }";
       break;
     case ReferenceFormType.ENUMERATED:
-      return "{ \"_ref\": \"" + typeIDToStringID(this.getDesiredClass()) + "\", \"_enum\": \"" + typeIDToStringID(this.getEnumeratedType()) + "\", \"_value\": \"" + typeIDToStringID(this.getEnumeratedValue()) + "\" }";
+      return "{ \"_ref\": \"" + typeIDToStringIDForUXP(this.getDesiredClass()) + "\", \"_enum\": \"" + typeIDToStringIDForUXP(this.getEnumeratedType()) + "\", \"_value\": \"" + typeIDToStringIDForUXP(this.getEnumeratedValue()) + "\" }";
       break;
     case ReferenceFormType.IDENTIFIER:
-      return "{ \"_ref\": \"" + typeIDToStringID(this.getDesiredClass()) + "\", \"_id\": " + this.getIdentifier().toString() + " }";
+      return "{ \"_ref\": \"" + typeIDToStringIDForUXP(this.getDesiredClass()) + "\", \"_id\": " + this.getIdentifier().toString() + " }";
       break;
     case ReferenceFormType.INDEX:
-      return "{ \"_ref\": \"" + typeIDToStringID(this.getDesiredClass()) + "\", \"_index\": " + this.getIndex().toString() + " }";
+      return "{ \"_ref\": \"" + typeIDToStringIDForUXP(this.getDesiredClass()) + "\", \"_index\": " + this.getIndex().toString() + " }";
       break;
     case ReferenceFormType.NAME:
-      return "{ \"_ref\": \"" + typeIDToStringID(this.getDesiredClass()) + "\", \"_name\": \"" + this.getName() + "\" }";
+      return "{ \"_ref\": \"" + typeIDToStringIDForUXP(this.getDesiredClass()) + "\", \"_name\": \"" + this.getName() + "\" }";
       break;
     case ReferenceFormType.OFFSET:
-      return "{ \"_ref\": \"" + typeIDToStringID(this.getDesiredClass()) + "\", \"_offset\": " + this.getOffset().toString() + " }";
+      return "{ \"_ref\": \"" + typeIDToStringIDForUXP(this.getDesiredClass()) + "\", \"_offset\": " + this.getOffset().toString() + " }";
       break;
     case ReferenceFormType.PROPERTY:
       var container = this.getContainer();
-      return "{ \"_ref\": [{ \"_property\": \"" + typeIDToStringID(this.getProperty())
+      return "{ \"_ref\": [{ \"_property\": \"" + typeIDToStringIDForUXP(this.getProperty())
           + "\" }, " + container.toUXP() + "]}";
   }
 
@@ -195,7 +195,7 @@ ActionReference.prototype.toUXP = function () {
 }
 
 executeActionForUXP = function (eventID, descriptor, displayDialogs) {
-  var finalForm = "require('photoshop').action.batchPlay([{ \"_obj\": \"" + typeIDToStringID(eventID) + "\"";
+  var finalForm = "require('photoshop').action.batchPlay([{ \"_obj\": \"" + typeIDToStringIDForUXP(eventID) + "\"";
   if (descriptor !== undefined && descriptor.count > 0) {
     finalForm += "," + descriptor.toUXPSerialized();
   }
@@ -241,4 +241,8 @@ executeActionGetForUXP = function (reference) {
   $.writeln(finalForm);
   
   return app.executeActionGet(reference);
+}
+
+typeIDToStringIDForUXP = function (key) {
+  return typeIDToStringID(key) || "$" + typeIDToCharID(key);
 }
